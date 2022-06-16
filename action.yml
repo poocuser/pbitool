@@ -1,0 +1,100 @@
+name: 'PowerBI CICD'
+description: '...'
+author: TDF TECH AUTHORITY We 🎔 TECH
+inputs:
+  who-to-greet:  # id of input
+    description: 'Who to greet'
+    required: true
+    default: 'World'
+  environment:
+    description: 'Who to greet'
+    required: true
+  files:
+    description: 'Assets to format'
+    required: true
+  separator:
+    description: 'The character used to seperate file names'
+    required: true
+  composite-path:
+    description: 'Composire directory path'
+    required: true
+  DEV_WORKSPACE:
+    description: 'Workspace to Publish the PBIX'
+    required: true
+  DEV_FOLDER:
+    description: 'dd'
+    required: false
+    default: "./Reports"
+  URL_PowerAutomate_EndPoint:
+    required: false
+    description: "Endpoint to send notifications"
+outputs:
+  random-number:
+    description: "Random number"
+    value: ${{ steps.random-number-generator.outputs.random-id }}
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Setup PbiTool
+      env:
+        GIT_EVENT_BEFORE: ${{ github.event.before }}
+        GIT_EVENT_AFTER: ${{ github.event.after }}
+        GIT_TRIGGER_NAME: ${{ github.event_name }}
+        MANUAL_TRIGGER_PATH_FILTER: ${{ github.event.inputs.path_filter }}
+        PBI_PREMIUM_WORKSPACE_ID: ${{ inputs.PBI_PREMIUM_WORKSPACE_ID }}
+        PBI_TENANT_ID: ${{ inputs.PBI_TENANT_ID }}
+        PBI_CLIENT_ID: ${{ inputs.PBI_CLIENT_ID }}
+        PBI_CLIENT_SECRET: ${{ inputs.PBI_CLIENT_SECRET }}    
+      run: |
+        $root_path = (Get-Location).Path
+        $tool_folder_name = "pbi-tools.core.1.0.0-rc.1_win-x64"
+        $pbitoolPath = Join-Path $root_path $tool_folder_name
+
+        #$env:PATH = $env:PATH + $pbitoolPath
+        #echo $env:PATH
+        #$executable pbi-tools info
+        #$env:PATH = $env:PATH + $executable
+
+        #$executable = ${{ github.action_path }}/pbi-tools.core.1.0.0-rc.1_win-x64/pbi-tools.core.exe
+
+        cd D:\a\
+        ls
+
+        cd D:\a\_actions\actions
+        ls
+
+        cd D:\a\_temp
+        ls
+
+        cd D:\a\PBI-Boilerplate
+        ls
+
+        cd ${{ github.action_path }}
+        ls
+
+        Test-Path -Path ${{ github.action_path }}\pbi-tools.core.1.0.0-rc.1_win-x64\pbi-tools.core.exe -PathType leaf
+
+        $Env:PATH += ";${{ github.action_path }}\pbi-tools.core.1.0.0-rc.1_win-x64"
+
+        cd ${{ github.action_path }}\pbi-tools.core.1.0.0-rc.1_win-x64
+        ls
+        
+        #pbi-tools info
+
+        Write-Information "!!!!!!!!!!!x!!!!!!!!!!!!!!!!!!!!!d!!!!!!!s!######################d############################!"
+
+        #Test-Path -Path $pbitoolPath -PathType leaf
+        #Test-Path -Path $executable -PathType leaf
+        
+      shell: pwsh
+    - name: Build
+      shell: cmd
+      run: |
+            #cd ${{ github.action_path }}\pbi-tools.core.1.0.0-rc.1_win-x64
+            #pbi-tools.core extract D:\a\PBI-Boilerplate\PBI-Boilerplate\EasySalesReport.pbix
+            #cd ${{ github.action_path }}
+            #PBIDesktopSetup_x64.exe -quiet -norestart ACCEPT_EULA=1 -log "%WINDIR%\Temp\PowerBI-Install.log"
+            @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
