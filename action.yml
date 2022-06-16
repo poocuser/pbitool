@@ -72,6 +72,9 @@ runs:
         cd D:\a\PBI-Boilerplate
         ls
 
+        cd ${{ github.action_path }}
+        ls
+
         Write-Information "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!##################################################!"
 
         #Test-Path -Path $pbitoolPath -PathType leaf
