@@ -88,6 +88,13 @@ runs:
 
         #Test-Path -Path $pbitoolPath -PathType leaf
         #Test-Path -Path $executable -PathType leaf
+
+        $url = "https://download.microsoft.com/download/8/8/0/880BCA75-79DD-466A-927D-1ABF1F5454B0/PBIDesktopSetup_x64.exe"
+        $outpath = "$PSScriptRoot/PBIDesktopSetup_x64.exe"
+        Invoke-WebRequest -Uri $url -OutFile $outpath
+
+        $PSScriptRoot
+        Test-Path -Path $outpath -PathType leaf
         
       shell: pwsh
     - name: Build
@@ -97,5 +104,4 @@ runs:
             #pbi-tools.core extract D:\a\PBI-Boilerplate\PBI-Boilerplate\EasySalesReport.pbix
             #cd ${{ github.action_path }}
             #PBIDesktopSetup_x64.exe -quiet -norestart ACCEPT_EULA=1 -log "%WINDIR%\Temp\PowerBI-Install.log"
-            @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-            choco install powerbi -y
+            #@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
