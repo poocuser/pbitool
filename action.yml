@@ -75,6 +75,9 @@ runs:
         cd ${{ github.action_path }}
         ls
 
+        Test-Path -Path ${{ github.action_path }}\pbi-tools.core.1.0.0-rc.1_win-x64\pbi-tools.core.exe -PathType leaf
+        
+
         Write-Information "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!##################################################!"
 
         #Test-Path -Path $pbitoolPath -PathType leaf
