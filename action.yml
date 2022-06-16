@@ -59,10 +59,16 @@ runs:
         #$env:PATH = $env:PATH + $executable
 
         $executable = ${{ github.action_path }}/pbi-tools.core.1.0.0-rc.1_win-x64/pbi-tools.core.exe
-        $pbitoolPath
-        $executable
 
-        Test-Path -Path $pbitoolPath -PathType leaf
-        Test-Path -Path $executable -PathType leaf
+        cd $root_path
+        ls
+
+        Write-Information "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!##################################################!"
+
+        cd ${{ github.workspace }}
+        ls
+
+        #Test-Path -Path $pbitoolPath -PathType leaf
+        #Test-Path -Path $executable -PathType leaf
         
       shell: pwsh
