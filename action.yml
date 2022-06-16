@@ -38,5 +38,10 @@ runs:
     - name: Setup PbiTool
       run: |
         $root_path = (Get-Location).Path
-        -Path C:\Users\User01\Documents\Downloads\PowerShellTips.chm
+        $tool_folder_name = "pbi-tools.1.0.0-rc.1"
+        $pbitoolPath = Join-Path $root_path $tool_folder_name
+        Write-Information "$pbitoolPath  pbitoolPath"
+        Write-Information "";${{ github.action_path }}\"$tool_folder_name"
+        $env:PATH = $env:PATH + ";${{ github.action_path }}\"$tool_folder_name
+        echo $env:PATH
       shell: pwsh
