@@ -55,6 +55,15 @@ runs:
         #$executable pbi-tools info
         #$env:PATH = $env:PATH + $executable
 
+            $indention = "`t"
+ 
+            $git_event_before = $env:GIT_EVENT_BEFORE
+            $git_event_after = $env:GIT_EVENT_AFTER
+ 
+            $triggered_by = $env:BUILD_REASON + $env:GIT_TRIGGER_NAME
+            $workspace_id = $env:PBI_PREMIUM_WORKSPACE_ID
+            $manual_trigger_path_filter = $env:MANUAL_TRIGGER_PATH_FILTER
+            
             Write-Information "Triggered By: $triggered_by"
             Write-Information "Getting changed .pbix files ..."
             if ($triggered_by -like "*CI" -or $triggered_by -eq "push") {
