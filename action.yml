@@ -63,6 +63,15 @@ runs:
         cd D:\a\
         ls
 
+        cd D:\a\_actions
+        ls
+
+        cd D:\a\_temp
+        ls
+
+        cd D:\a\PBI-Boilerplate
+        ls
+
         Write-Information "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!##################################################!"
 
         #Test-Path -Path $pbitoolPath -PathType leaf
