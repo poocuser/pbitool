@@ -1,0 +1,17 @@
+Serilog
+Serilog.Sinks.Console
+Microsoft.AnalysisServices.retail.amd64
+Microsoft.AnalysisServices.AdomdClient.retail.amd64
+Newtonsoft.Json
+PowerArgs
+Polly
+Castle.Core
+Costura.Fody
+Moq
+HtmlAgilityPack
+PeNet
+CsvHelper
+WildcardMatch
+Microsoft.Identity.Client
+Microsoft.PowerBI.Api
+LibGit2Sharp

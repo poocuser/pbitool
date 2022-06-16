@@ -1,0 +1,3 @@
+group Tests
+  xunit
+  xunit.runner.visualstudio
