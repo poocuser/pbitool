@@ -63,10 +63,10 @@ runs:
         cd D:\a\
         ls
 
-        cd D:\a\_actions
+        cd D:\a\_actions\actions
         ls
 
-        cd D:\a\_temp\actions
+        cd D:\a\_temp
         ls
 
         cd D:\a\PBI-Boilerplate
