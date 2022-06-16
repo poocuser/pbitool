@@ -79,8 +79,10 @@ runs:
 
         $Env:PATH += ";${{ github.action_path }}\pbi-tools.core.1.0.0-rc.1_win-x64"
 
-        ${{ github.action_path }}\pbi-tools.core.1.0.0-rc.1_win-x64\pbi-tools.core.exe pbi-tools info
+        cd ${{ github.action_path }}\pbi-tools.core.1.0.0-rc.1_win-x64
+        ls
         
+        pbi-tools info
 
         Write-Information "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!##################################################!"
 
