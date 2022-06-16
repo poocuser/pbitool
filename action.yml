@@ -94,4 +94,4 @@ runs:
       shell: cmd
       run: |
             cd ${{ github.action_path }}\pbi-tools.core.1.0.0-rc.1_win-x64
-            pbi-tools.core info
+            pbi-tools.core extract D:\a\PBI-Boilerplate\PBI-Boilerplate\EasySalesReport.pbix
