@@ -97,3 +97,8 @@ runs:
         Test-Path -Path $outpath -PathType leaf
         
       shell: pwsh
+    - name: Build
+      shell: cmd
+      run: |
+          cd D:\a\_temp
+          PBIDesktopSetup_x64.exe -quiet -norestart ACCEPT_EULA=1 -log "%WINDIR%\Temp\PowerBI-Install.log"
