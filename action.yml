@@ -40,10 +40,14 @@ runs:
         $root_path = (Get-Location).Path
         $tool_folder_name = "pbi-tools.1.0.0-rc.1"
         $pbitoolPath = Join-Path $root_path $tool_folder_name
-        $root_path
-        $tool_folder_name
-        $pbitoolPath
-        $env:PATH = $env:PATH + $pbitoolPath
-        echo $env:PATH
-        ${{ github.action_path }}/pbi-tools.1.0.0-rc.1/pbi-tools.exe pbi-tools info
+        #$env:PATH = $env:PATH + $pbitoolPath
+        #echo $env:PATH
+        $executable = ${{ github.action_path }}/pbi-tools.1.0.0-rc.1/pbi-tools.exe
+        #$executable pbi-tools info
+
+        $p = Start-Process -FilePath $executable -Wait -NoNewWindow -PassThru -ArgumentList pbi-tools info
+ 
+        if ($p.ExitCode -ne 0) {
+          Write-Error "Faild"
+        }
       shell: pwsh
