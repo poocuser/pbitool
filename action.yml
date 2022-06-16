@@ -84,7 +84,7 @@ runs:
         
         #pbi-tools info
 
-        Write-Information "!!!!!!!!!!!x!!!!!!!!!!!!!!!!!!!!!d!!!!!!!s!######################d############################!"
+        Write-Information "!!!!!!!!!!!x!!!!!!!!!!!!!!!!!!!!!dd!!!!!!!s!######################d############################!"
 
         #Test-Path -Path $pbitoolPath -PathType leaf
         #Test-Path -Path $executable -PathType leaf
