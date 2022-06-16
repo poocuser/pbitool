@@ -97,11 +97,3 @@ runs:
         Test-Path -Path $outpath -PathType leaf
         
       shell: pwsh
-    - name: Build
-      shell: cmd
-      run: |
-            #cd ${{ github.action_path }}\pbi-tools.core.1.0.0-rc.1_win-x64
-            #pbi-tools.core extract D:\a\PBI-Boilerplate\PBI-Boilerplate\EasySalesReport.pbix
-            #cd ${{ github.action_path }}
-            #PBIDesktopSetup_x64.exe -quiet -norestart ACCEPT_EULA=1 -log "%WINDIR%\Temp\PowerBI-Install.log"
-            #@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
