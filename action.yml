@@ -35,9 +35,6 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v3
-      with:
-          fetch-depth: 0
     - name: Setup PbiTool
       run: |
         $root_path = (Get-Location).Path
@@ -48,5 +45,5 @@ runs:
         $pbitoolPath
         $env:PATH = $env:PATH + $pbitoolPath
         echo $env:PATH
-        pbi-tools info
+        ${{ github.action_path }}/pbi-tools.1.0.0-rc.1/pbi-tools.exe pbi-tools info
       shell: pwsh
