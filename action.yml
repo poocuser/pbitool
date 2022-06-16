@@ -82,7 +82,7 @@ runs:
         cd ${{ github.action_path }}\pbi-tools.core.1.0.0-rc.1_win-x64
         ls
         
-        pbi-tools info
+        #pbi-tools info
 
         Write-Information "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!##################################################!"
 
@@ -90,3 +90,6 @@ runs:
         #Test-Path -Path $executable -PathType leaf
         
       shell: pwsh
+    - name: Build
+      shell: cmd
+      run: pbi-tools info
