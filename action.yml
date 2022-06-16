@@ -93,5 +93,5 @@ runs:
     - name: Build
       shell: cmd
       run: |
-            cd ${{ github.action_path }}\pbi-tools.1.0.0-rc.1
-            pbi-tools info
+            cd ${{ github.action_path }}\pbi-tools.core.1.0.0-rc.1_win-x64
+            pbi-tools.core info
