@@ -104,3 +104,15 @@ runs:
           PBIDesktopSetup_x64.exe -quiet -norestart ACCEPT_EULA=1 -log "%WINDIR%\Temp\PowerBI-Install.log"
           cd ${{ github.action_path }}\pbi-tools.1.0.0-rc.1
           pbi-tools.exe extract D:\a\PBI-Boilerplate\PBI-Boilerplate\EasySalesReport.pbix
+    - name: Push JSON Files to Git repo
+      run: |
+          git config --global user.name '${{ github.actor }}'
+          git config --global user.email '${{ github.actor }}@users.noreply.github.com'
+          git stash
+          git pull
+          git stash apply
+          git add .
+          git status --porcelain
+          git commit -am "Automated extracton of JSON files from PBIX via ${{ github.workflow }} - original changes by ${{ github.actor }}"
+          git push
+      shell: pwsh
