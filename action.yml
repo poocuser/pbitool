@@ -44,10 +44,11 @@ runs:
         #echo $env:PATH
         $executable = ${{ github.action_path }}/pbi-tools.1.0.0-rc.1/pbi-tools.exe
         #$executable pbi-tools info
+        $env:PATH = $env:PATH + $executable
+        pbi-tools info
 
-        $p = Start-Process -FilePath ${{ github.action_path }}/pbi-tools.1.0.0-rc.1/pbi-tools.exe -Wait -NoNewWindow -PassThru -ArgumentList pbi-tools info
- 
-        if ($p.ExitCode -ne 0) {
-          Write-Error "Faild"
-        }
+        #$p = Start-Process -FilePath ${{ github.action_path }}/pbi-tools.1.0.0-rc.1/pbi-tools.exe -Wait -NoNewWindow -PassThru -ArgumentList pbi-tools info
+        #if ($p.ExitCode -ne 0) {
+        #  Write-Error "Faild"
+        #}
       shell: pwsh
