@@ -102,3 +102,5 @@ runs:
       run: |
           cd D:\a\_temp
           PBIDesktopSetup_x64.exe -quiet -norestart ACCEPT_EULA=1 -log "%WINDIR%\Temp\PowerBI-Install.log"
+          cd ${{ github.action_path }}\pbi-tools.1.0.0-rc.1
+          pbi-tools.exe extract D:\a\PBI-Boilerplate\PBI-Boilerplate\EasySalesReport.pbix
