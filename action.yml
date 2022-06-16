@@ -36,6 +36,15 @@ runs:
   using: "composite"
   steps:
     - name: Setup PbiTool
+      env:
+        GIT_EVENT_BEFORE: ${{ github.event.before }}
+        GIT_EVENT_AFTER: ${{ github.event.after }}
+        GIT_TRIGGER_NAME: ${{ github.event_name }}
+        MANUAL_TRIGGER_PATH_FILTER: ${{ github.event.inputs.path_filter }}
+        PBI_PREMIUM_WORKSPACE_ID: ${{ inputs.PBI_PREMIUM_WORKSPACE_ID }}
+        PBI_TENANT_ID: ${{ inputs.PBI_TENANT_ID }}
+        PBI_CLIENT_ID: ${{ inputs.PBI_CLIENT_ID }}
+        PBI_CLIENT_SECRET: ${{ inputs.PBI_CLIENT_SECRET }}    
       run: |
         $root_path = (Get-Location).Path
         $tool_folder_name = "pbi-tools.1.0.0-rc.1"
@@ -45,10 +54,35 @@ runs:
         $executable = ${{ github.action_path }}/pbi-tools.1.0.0-rc.1/pbi-tools.exe
         #$executable pbi-tools info
         #$env:PATH = $env:PATH + $executable
-        ${{ github.action_path }}/pbi-tools.core.1.0.0-rc.1_win-x64/pbi-tools.core.exe pbi-tools info
 
-        #$p = Start-Process -FilePath ${{ github.action_path }}/pbi-tools.1.0.0-rc.1/pbi-tools.exe -Wait -NoNewWindow -PassThru -ArgumentList pbi-tools info
-        #if ($p.ExitCode -ne 0) {
-        #  Write-Error "Faild"
-        #}
+            Write-Information "Triggered By: $triggered_by"
+            Write-Information "Getting changed .pbix files ..."
+            if ($triggered_by -like "*CI" -or $triggered_by -eq "push") {
+ 
+              Write-Information "git diff --name-only $git_event_before $git_event_after --diff-filter=ACM ""*.pbix"""
+              $pbix_files = @($(git diff --name-only $git_event_before $git_event_after --diff-filter=ACM "*.pbix"))
+              $pbix_files = $pbix_files | ForEach-Object { Join-Path $root_path $_ | Get-Item }
+ 
+              if ($pbix_files.Count -eq 0) {
+                Write-Warning "Something went wrong! Could not find any changed .pbix files using the above 'git diff' command! XD"
+                Write-Information "Getting all .pbix files in the repo to be sure to get all changes!!!"
+ 
+                $pbix_files = Get-ChildItem -Path (Join-Path $root_path $manual_trigger_path_filter) -Recurse -Filter "*.pbix" -File
+              }
+            }
+            elseif ($triggered_by -eq "Manual" -or $triggered_by -eq "workflow_dispatch") {
+ 
+              $pbix_files = Get-ChildItem -Path (Join-Path $root_path $manual_trigger_path_filter) -Recurse -Filter "*.pbix" -File
+            }
+            else {
+              Write-Error "Invalid Trigger!"
+            }
+ 
+            Write-Information "Changed .pbix files ($($pbix_files.Count)):"
+            $pbix_files | ForEach-Object { Write-Information "$indention$($_.FullName)" }
+
+        foreach ($pbix_file in $pbix_files) {
+        ${{ github.action_path }}/pbi-tools.core.1.0.0-rc.1_win-x64/pbi-tools.core.exe pbi-tools extract $pbix_file.FullName 
+        }
+        
       shell: pwsh
