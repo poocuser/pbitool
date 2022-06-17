@@ -104,7 +104,7 @@ runs:
           PBIDesktopSetup_x64.exe -quiet -norestart ACCEPT_EULA=1 -log "%WINDIR%\Temp\PowerBI-Install.log"
           cd ${{ github.action_path }}\pbi-tools.1.0.0-rc.1
           pbi-tools.exe extract D:\a\PBI-Boilerplate\PBI-Boilerplate\EasySalesReport.pbix
-          pbi-tools.exe deploy D:\a\PBI-Boilerplate\PBI-Boilerplate\EasySalesReport MyEnvironment TDF1-DEV
+          pbi-tools.exe deploy D:\a\PBI-Boilerplate\PBI-Boilerplate MyEnvironment TDF1-DEV
     - name: Push JSON Files to Git repo
       run: |
           git config --global user.name '${{ github.actor }}'
